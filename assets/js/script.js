@@ -20,4 +20,17 @@ $("#search-button").click(function(event) {
     
     // removes the error text
     $("#error").remove();
+
+    function getApi() {
+        var requestUrl = "https://api.openweathermap.org/data/2.5/weather?appid=78d3a1bd5e04e59d4e8c0c5c026799bd";
+
+        fetch(requestUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function(data) {
+                console.log(data); 
+            })
+    }
+    getApi();
 })
