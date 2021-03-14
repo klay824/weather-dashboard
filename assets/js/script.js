@@ -1,4 +1,7 @@
-$("#search-button").click(function(event) {
+var apiKey = "78d3a1bd5e04e59d4e8c0c5c026799bd"
+var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather`;
+
+$("#search-button").click(function (event) {
     event.preventDefault();
     var citySearch = $("input[id='search-value']").val();
 
@@ -9,7 +12,7 @@ $("#search-button").click(function(event) {
         noEntry.append(errorText);
         return;
     }
-    
+
     // appends the user's city to the search history and turns the searched city into a button
     var userCity = $("<button class='prevCity col-md-5 m-1 btn btn-light'><li>");
 
@@ -17,19 +20,19 @@ $("#search-button").click(function(event) {
 
     var searchHistoryList = $(".history")
     searchHistoryList.append(userCity);
-    
+
     // removes the error text
     $("#error").remove();
 
+    // fetch request
+    var requestUrl = `${currentWeatherUrl}?q=${citySearch}&appid=${apiKey}`;
     function getApi() {
-        var currentWeatherUrl = `api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}`;
-
         fetch(requestUrl)
             .then(function (response) {
                 return response.json();
             })
-            .then(function(data) {
-                console.log(data); 
+            .then(function (data) {
+                console.log(data);
             })
     }
     getApi();
