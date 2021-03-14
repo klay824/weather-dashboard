@@ -2,8 +2,10 @@ $("#search-button").click(function(event) {
     event.preventDefault();
     var citySearch = $("input[id='search-value']").val();
 
+    var errorText = $("<p class='text-danger ml-2'>Please enter a city!</p>");
+    var noEntry = $(".aside")
     if (!citySearch) {
-        console.log("Please enter a city!");
+        noEntry.append(errorText);
         return;
     }
 
