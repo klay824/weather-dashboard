@@ -22,7 +22,7 @@ $("#search-button").click(function(event) {
     $("#error").remove();
 
     function getApi() {
-        var requestUrl = "https://api.openweathermap.org/data/2.5/weather?appid=78d3a1bd5e04e59d4e8c0c5c026799bd";
+        var currentWeatherUrl = `api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}`;
 
         fetch(requestUrl)
             .then(function (response) {
