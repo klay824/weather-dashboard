@@ -25,7 +25,7 @@ $("#search-button").click(function (event) {
     $("#error").remove();
 
     // fetch request
-    var requestUrl = `${currentWeatherUrl}?q=${citySearch}&appid=${apiKey}`;
+    var requestUrl = `${currentWeatherUrl}?q=${citySearch}&appid=${apiKey}&units=imperial`;
     function getApi() {
         fetch(requestUrl)
             .then(function (response) {
