@@ -3,3 +3,7 @@ header {
     color: white;
     font-size: 75px;
 }
+
+li {
+    list-style-type: none;
+}
