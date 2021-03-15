@@ -1,5 +1,6 @@
 var apiKey = "78d3a1bd5e04e59d4e8c0c5c026799bd"
 var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather`;
+var currentDate = moment().format("MMMM Do YYYY");
 
 $("#search-button").click(function (event) {
     event.preventDefault();
@@ -35,8 +36,15 @@ $("#search-button").click(function (event) {
                 console.log(data);
                 console.log(data.name);
                 console.log(data.weather[0].icon);
-                var cityName = (data.name + weather[0].icon);
-                $("#today").html(cityName);
+                var icon = (data.weather[0].icon);
+                var iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
+                var cityName = (data.name) + "   " + currentDate + "   " + "<img src="+iconUrl+">";
+                
+                var currentWeather = $("<h1></h1>");
+                currentWeather.text(cityName);
+
+                var forecastToday = $("#today");
+                forecastToday.append(cityName);
             })            
     }
     getApi();
