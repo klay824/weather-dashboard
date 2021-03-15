@@ -33,7 +33,12 @@ $("#search-button").click(function (event) {
             })
             .then(function (data) {
                 console.log(data);
-            })
+                console.log(data.name);
+                console.log(data.weather[0].icon);
+                var cityName = (data.name + weather[0].icon);
+                $("#today").html(cityName);
+            })            
     }
     getApi();
+    
 })
