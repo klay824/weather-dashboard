@@ -27,7 +27,7 @@ $("#search-button").click(function (event) {
 
     // fetch request
     var requestUrl = `${currentWeatherUrl}?q=${citySearch}&appid=${apiKey}&units=imperial`;
-    function getApi() {
+    function currentWeatherApi() {
         fetch(requestUrl)
             .then(function (response) {
                 return response.json();
@@ -47,18 +47,14 @@ $("#search-button").click(function (event) {
                 var forecastToday = $("#today").addClass("today");
                 forecastToday.append(cityName);
 
-                var temp = '<h5 class="m-1">' + 'Temperature: ' + (data.main.temp) + '°F' + '</h5>';
-                var humidity = '<h5 class="m-1">' + (data.main.humidity) + '%' + '</h5>';
-                var windSpeed = '<h5 class="m-1">' + (data.wind.speed) + ' MPH' + '</h5>';
+                var temp = '<h5 class="m-1 pb-5 city">' + 'Temperature: ' + (data.main.temp) + '°F' + '</h5>';
+                var humidity = '<h5 class="m-1 pb-5 city">' + 'Humidity: ' + (data.main.humidity) + '%' + '</h5>';
+                var windSpeed = '<h5 class="m-1 pb-5 city">' + 'Wind Speed: ' + (data.wind.speed) + ' MPH' + '</h5>';
                 
                 forecastToday.append(temp);
                 forecastToday.append(humidity);
-                forecastToday.append(windSpeed);
-            
-                
-            
+                forecastToday.append(windSpeed);                       
             })            
     }
-    getApi();
-    
+    currentWeatherApi();    
 })
