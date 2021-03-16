@@ -44,7 +44,7 @@ $("#search-button").click(function (event) {
                 var iconImg = "<img src ="+iconUrl+">";
                 var cityName = '<h1 class="city">' + (data.name) + ' (' + currentDate + ')' + iconImg + '</h1>';
                 
-                var forecastToday = $("#today");
+                var forecastToday = $("#today").addClass("today");
                 forecastToday.append(cityName);
 
                 var temp = '<h5 class="m-1">' + 'Temperature: ' + (data.main.temp) + '°F' + '</h5>';
@@ -54,6 +54,8 @@ $("#search-button").click(function (event) {
                 forecastToday.append(temp);
                 forecastToday.append(humidity);
                 forecastToday.append(windSpeed);
+            
+                
             
             })            
     }
