@@ -1,6 +1,6 @@
 var apiKey = "78d3a1bd5e04e59d4e8c0c5c026799bd"
 var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather`;
-var currentDate = moment().format("MMMM Do YYYY");
+var currentDate = moment().format("M/D/YY");
 
 $("#search-button").click(function (event) {
     event.preventDefault();
@@ -34,17 +34,27 @@ $("#search-button").click(function (event) {
             })
             .then(function (data) {
                 console.log(data);
-                console.log(data.name);
-                console.log(data.weather[0].icon);
-                var icon = (data.weather[0].icon);
-                var iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
-                var cityName = (data.name) + "   " + currentDate + "   " + "<img src="+iconUrl+">";
-                
-                var currentWeather = $("<h1></h1>");
-                currentWeather.text(cityName);
+                console.log(data.main.temp + " °F");
+                console.log(data.main.humidity + "%");
+                console.log(data.wind.speed + " MPH");
 
+                $(".city").remove();
+                var icon = (data.weather[0].icon);
+                var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+                var iconImg = "<img src ="+iconUrl+">";
+                var cityName = '<h1 class="city">' + (data.name) + ' (' + currentDate + ')' + iconImg + '</h1>';
+                
                 var forecastToday = $("#today");
                 forecastToday.append(cityName);
+
+                var temp = '<h5 class="m-1">' + 'Temperature: ' + (data.main.temp) + '°F' + '</h5>';
+                var humidity = '<h5 class="m-1">' + (data.main.humidity) + '%' + '</h5>';
+                var windSpeed = '<h5 class="m-1">' + (data.wind.speed) + ' MPH' + '</h5>';
+                
+                forecastToday.append(temp);
+                forecastToday.append(humidity);
+                forecastToday.append(windSpeed);
+            
             })            
     }
     getApi();
