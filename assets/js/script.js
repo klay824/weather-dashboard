@@ -42,7 +42,7 @@ $("#search-button").click(function (event) {
                 var icon = (data.weather[0].icon);
                 var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
                 var iconImg = "<img src ="+iconUrl+">";
-                var cityName = '<h1 class="city">' + (data.name) + ' (' + currentDate + ')' + iconImg + '</h1>';
+                var cityName = '<h1 class="city m-1">' + (data.name) + ' (' + currentDate + ')' + iconImg + '</h1>';
                 
                 var forecastToday = $("#today").addClass("today");
                 forecastToday.append(cityName);
