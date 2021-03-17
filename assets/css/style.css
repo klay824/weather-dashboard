@@ -14,7 +14,13 @@ li {
     border-left: 1px solid rgb(70, 68, 68);
 }
 
-.forecast {
+.forecastBox {
     background-color: rgb(24, 24, 92);
     color: white;
+    border: whitesmoke 1px solid;
+    border-radius: 25px;
+}
+
+.search-history {
+    color: rgb(66, 64, 64);
 }
