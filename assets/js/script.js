@@ -8,16 +8,16 @@ $(document).ready(function() {
     var searchBtn = $("#search-form");
     var historyContainer = $("#search-history");
 
+    // search button event
     searchBtn.submit(function (event) {
         event.preventDefault();
 
+        // adding cities to an ul
         var searchValues = $(this).serializeArray();
         var city = searchValues[0].value;
         var searchHistoryDiv = $("<div class='search-history m-2 bg-light col-md-3 rounded'>");
         searchHistoryDiv.text(city);
         historyContainer.append(searchHistoryDiv);
-
-        console.log(searchValues, city);
 
         searchForWeather(city);
 
@@ -58,12 +58,48 @@ $(document).ready(function() {
                 })
                 .then(function (data) {
                     console.log(data);
+                    
+                    // getting the weather icon for 1 day out weather
+                    var icon1 = (data.list[0].weather[0].icon);
+                    var icon1Url = "http://openweathermap.org/img/wn/" + icon1 + ".png";
+                    var icon1Img = "<img src =" + icon1Url + ">";
+                    
+                    // getting HTML ready for weather icon
+                    var iconTomorrow = '<h3 class="text-center">' +icon1Img + '</h3>';
+                    
+                    // setting the variable for the div the weather data will append to for tomorrow's forecast
+                    var day1Display = $("#day-one-forecast");
+                   
+                    // appending the icon to the div
+                    day1Display.append(iconTomorrow);
+                   
+                    // getting HTML ready for the temp and the humidity
+                    var temp1 = '<p class="text-center">' + 'Temp: ' + (data.list[0].main.temp) + '°F' + '</p>';
+                    var humidity1 = '<p class="text-center">' + 'Humidity: ' + data.list[0].main.humidity + '%' + '</p>';
+                    
+                    //  appending the temp and humidity
+                    day1Display.append(temp1);
+                    day1Display.append(humidity1);
+
+                    // getting the weather icon for 2 days out weather
+                    var icon2 = (data.list[1].weather[0].icon);
+                    var icon2Url = "http://openweathermap.org/img/wn/" + icon2 + ".png";
+                    var icon2Img = "<img src =" + icon2Url + ">";
+
+                    // getting HTML ready for weather icon
+                    var iconTwoDays = '<h3 class="text-center">' +icon2Img + '</h3>';
+                    
+                    // setting the variable for the div the weather data will append to for tomorrow's forecast
+                    var day2Display = $("#day-two-forecast");
+                   
+                    // appending the icon to the div
+                    day2Display.append(iconTwoDays);
                 })
         }
         forecastApi();
     })
 
     function searchForWeather(city) {
-        console.log(city);
+        
     }
 })
