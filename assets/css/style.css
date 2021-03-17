@@ -4,10 +4,6 @@ header {
     font-size: 75px;
 }
 
-li {
-    list-style-type: none;
-}
-
 .today {
     border-top: 1px solid rgb(70, 68, 68);
     border-bottom: 1px solid rgb(70, 68, 68);
@@ -17,8 +13,7 @@ li {
 .forecastBox {
     background-color: rgb(66, 66, 209);
     color: white;
-    border: whitesmoke 1px solid;
-    border-radius: 25px;
+    border-radius: 15px;
 }
 
 .search-history {
