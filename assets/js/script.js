@@ -18,6 +18,7 @@ $(document).ready(function() {
         var searchHistoryDiv = $("<div class='search-history m-2 p-2 text-center bg-light col-md-3 rounded'>");
         searchHistoryDiv.text(city);
         historyContainer.append(searchHistoryDiv);
+        localStorage.setItem("search", city);
 
         searchForWeather(city);
 
