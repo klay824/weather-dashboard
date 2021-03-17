@@ -30,12 +30,15 @@
         <div class="row">
             <aside class="col-lg-3 bg-secondary aside">
                 <h5 class="mt-1">Search for a City:</h5>
-                <div class="form-inline form-group">
-                    <input class="form-control" type="text" id="search-value"/>
-                    <button class="btn btn-primary" id="search-button"> <i class="fa fa-search"></i></button>
+                <form id="search-form" class="form-inline form-group">
+                    <input class="form-control" type="text" name="city" id="search-value"/>
+                    <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i></button>
+                </form>
+
+                <div id="search-history">
+                    
                 </div>
 
-                <ul class="list-group history"></ul>
             </aside>
 
             <div class="col-lg-9">
