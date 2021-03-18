@@ -12,7 +12,7 @@ $(document).ready(function () {
     searchBtn.submit(function (event) {
         event.preventDefault();
 
-        // adding cities to an ul
+        // adding cities to a div
         var searchValues = $(this).serializeArray();
         var city = searchValues[0].value;
         var searchHistoryDiv = $("<div class='search-history m-2 p-2 text-center bg-light col-md-3 rounded'>");
@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         // searchForWeather(city);
 
-        // fetch request
+        // today's weather fetch request
         var requestUrl = `${currentWeatherUrl}?q=${city}&appid=${apiKey}&units=imperial`;
         function currentWeatherApi() {
             fetch(requestUrl)
