@@ -51,6 +51,7 @@ $(document).ready(function () {
         }
         currentWeatherApi();
 
+        // 5-day forecast fetch
         var rqstUrl = `${forecastUrl}?q=${city}&appid=${apiKey}&units=imperial`;
         function forecastApi() {
             fetch(rqstUrl)
@@ -59,9 +60,10 @@ $(document).ready(function () {
                 })
                 .then(function (data) {
                     console.log(data);
+                    // looping through the 40 results since it gives weather for every three hours for 5 days and we only need 5 days at the same time
                     for (var i = 0; i < data.list.length; i++) {
-                        var isThreeOClock = data.list[i].dt_txt.search('15:00:00');
-                        // console.log(isThreeOClock);
+                        var isThreeOClock = data.list[i].dt_txt.search('15:00:00'); /* searching for only 3pm */
+                        
                         var forecastContainer = $("#forecast");
                         if (isThreeOClock > -1) {
                             var forecast = data.list[i]
@@ -80,9 +82,10 @@ $(document).ready(function () {
                             var iconDiv = $("<div class='icon-name text-center'>" + iconImg + "</div");
                             
                             dayDiv.text(day);
-                            tempDiv.text("Temp: " + temp + "°F");
+                            tempDiv.text("Temp: " + temp + " °F");
                             humidityDiv.text("Humidity: " + humidity + "%");
 
+                            // appending to the row div, then appending to the container
                             rowDiv.append(dayDiv);
                             rowDiv.append(iconDiv);
                             rowDiv.append(tempDiv);
