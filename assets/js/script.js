@@ -73,7 +73,7 @@ $(document).ready(function () {
                             var temp = forecast.main.temp;
                             var humidity = forecast.main.humidity;
                             
-                            var rowDiv = $("<div class='col-1 forecastBox m-1 justify-content-center'>")
+                            var rowDiv = $("<div class='col-1 forecastBox mt-1 mr-3 mb-1 justify-content-center'>")
                             var dayDiv = $("<div class='day-name text-center'>");
                             var tempDiv = $("<div class='temp-name text-center'>");
                             var humidityDiv = $("<div class='humidity-name text-center'>");
