@@ -35,6 +35,7 @@ $(document).ready(function () {
 
         searchHistoryDiv.text(city);
         historyContainer.append(searchHistoryDiv);
+
         currentWeatherApi(city);
         forecastApi(city);
     });
@@ -48,7 +49,7 @@ $(document).ready(function () {
             })
             .then(function (data) {
                 $(".city").remove();
-                var icon = (data.weather[0].icon);
+                var icon = data.weather[0].icon;
                 var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
                 var iconImg = "<img src =" + iconUrl + ">";
 
@@ -66,7 +67,6 @@ $(document).ready(function () {
                 forecastToday.append(windSpeed);
             })
     }
-
 
     // 5-day forecast fetch
 
@@ -115,8 +115,6 @@ $(document).ready(function () {
             });
     }
 
-
-
     function retrieveHistory() {
         if (localStorage.getItem("searchHistory")) {
             searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
@@ -126,6 +124,7 @@ $(document).ready(function () {
                 // adding click power to dynamically generated buttons
                 searchHistoryDiv.click(function (event) {
                     event.preventDefault();
+                    var value = event.target.innerHTML;
                     currentWeatherApi(value); /* adding the values from the two forecast api functions */
                     forecastApi(value);
                 });
