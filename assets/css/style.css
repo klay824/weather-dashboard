@@ -5,9 +5,7 @@ header {
 }
 
 .today {
-    border-top: 1px solid rgb(70, 68, 68);
-    border-bottom: 1px solid rgb(70, 68, 68);
-    border-left: 1px solid rgb(70, 68, 68);
+    border: 1px solid rgb(70, 68, 68);
 }
 
 .forecastBox {
