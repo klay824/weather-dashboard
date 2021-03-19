@@ -7,6 +7,7 @@ $(document).ready(function () {
     var currentDate = moment().format("M/D/YY");
     var searchBtn = $("#search-form");
     var historyContainer = $("#search-history");
+    var searchHistory = [];
 
     // search button event
     searchBtn.submit(function (event) {
@@ -15,7 +16,12 @@ $(document).ready(function () {
         // adding cities to a div
         var searchValues = $(this).serializeArray();
         var city = searchValues[0].value;
-        var searchHistoryDiv = $("<div class='search-history m-2 p-2 text-center bg-light col-md-3 rounded'>");
+        var searchHistoryDiv = $("<div class='search-history mt-2 mr-2 mb-2 p-2 text-center bg-light col-sm-1 col-md-4 col-lg-7 rounded'>");
+        searchHistory.push(city);
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        var button = $("<button type='button' class='city-button'>");
+        button
+
         searchHistoryDiv.text(city);
         historyContainer.append(searchHistoryDiv);
         localStorage.setItem("search", city);
@@ -59,6 +65,7 @@ $(document).ready(function () {
                     return response.json();
                 })
                 .then(function (data) {
+                    $(".remove").remove();
                     console.log(data);
                     // looping through the 40 results since it gives weather for every three hours for 5 days and we only need 5 days at the same time
                     for (var i = 0; i < data.list.length; i++) {
@@ -75,11 +82,12 @@ $(document).ready(function () {
                             var temp = forecast.main.temp;
                             var humidity = forecast.main.humidity;
                             
-                            var rowDiv = $("<div class='col-1 forecastBox mt-1 mr-3 mb-1 justify-content-center'>")
-                            var dayDiv = $("<div class='day-name text-center'>");
-                            var tempDiv = $("<div class='temp-name text-center'>");
-                            var humidityDiv = $("<div class='humidity-name text-center'>");
-                            var iconDiv = $("<div class='icon-name text-center'>" + iconImg + "</div");
+                            var rowDiv = $("<div class='col-sm-3 col-md-4 col-lg-2 forecastBox mt-1 mr-3 mb-1 justify-content-center remove'>")
+                            var dayDiv = $("<div class='day-name text-center remove pt-2'>");
+                            var iconDiv = $("<div class='icon-name text-center remove'>" + iconImg + "</div");
+                            var tempDiv = $("<div class='temp-name text-center remove'>");
+                            var humidityDiv = $("<div class='humidity-name text-center remove pb-2'>");
+                            
                             
                             dayDiv.text(day);
                             tempDiv.text("Temp: " + temp + " °F");
@@ -98,7 +106,15 @@ $(document).ready(function () {
         forecastApi();
     })
 
-    // function searchForWeather(city) {
-
-    // }
+    function retrieveHistory() {
+        if (localStorage.getItem("searchHistory")) {
+            searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
+            for (var i=0; i < searchHistory.length; i++) {
+                var searchHistoryDiv = $("<div class='search-history m-2 p-2 text-center bg-light col-md-3 rounded'>");
+                searchHistoryDiv.text(searchHistory[i]);
+                historyContainer.append(searchHistoryDiv);
+            }
+        }
+    }
+    retrieveHistory();
 })
