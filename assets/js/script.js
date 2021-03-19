@@ -16,15 +16,23 @@ $(document).ready(function () {
         // adding cities to a div
         var searchValues = $(this).serializeArray();
         var city = searchValues[0].value;
-        var searchHistoryDiv = $("<div class='search-history mt-2 mr-2 mb-2 p-2 text-center bg-light col-sm-1 col-md-4 col-lg-7 rounded'>");
+        var searchHistoryDiv = $("<button type='button' class='btn search-history mt-2 mr-2 mb-2 p-2 text-center bg-light col-sm-1 col-md-4 col-lg-7 rounded'>");
+
+        // adding click power to dynamically generated buttons
+        searchHistoryDiv.click(function(event) {
+            event.preventDefault();
+            var value = $(this).text();
+            currentWeatherApi(value);
+            forecastApi(value);
+        });
+
+        // pushing city value to searchHistory array, then saving to local storage
         searchHistory.push(city);
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-        var button = $("<button type='button' class='city-button'>");
-        button
-
+        
         searchHistoryDiv.text(city);
         historyContainer.append(searchHistoryDiv);
-        localStorage.setItem("search", city);
+        // localStorage.setItem("search", city);
 
         // searchForWeather(city);
 
@@ -66,7 +74,6 @@ $(document).ready(function () {
                 })
                 .then(function (data) {
                     $(".remove").remove();
-                    console.log(data);
                     // looping through the 40 results since it gives weather for every three hours for 5 days and we only need 5 days at the same time
                     for (var i = 0; i < data.list.length; i++) {
                         var isThreeOClock = data.list[i].dt_txt.search('15:00:00'); /* searching for only 3pm */
@@ -110,11 +117,16 @@ $(document).ready(function () {
         if (localStorage.getItem("searchHistory")) {
             searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
             for (var i=0; i < searchHistory.length; i++) {
-                var searchHistoryDiv = $("<div class='search-history m-2 p-2 text-center bg-light col-md-3 rounded'>");
+                var searchHistoryDiv = $("<button type='button' class='btn search-history mt-2 mr-2 mb-2 p-2 text-center bg-light col-sm-1 col-md-4 col-lg-7 rounded'>");
+                // adding click power to dynamically generated buttons
+                searchHistoryDiv.click(function(event) {
+                    event.preventDefault();
+                    console.log(event);
+                });
                 searchHistoryDiv.text(searchHistory[i]);
                 historyContainer.append(searchHistoryDiv);
             }
         }
     }
     retrieveHistory();
-})
+});
