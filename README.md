@@ -25,7 +25,7 @@ Please follow [this link](https://klay824.github.io/weather-dashboard/) to view 
 * Our TA's Andrew and Cody
 
 ## GIF Demonstration
-
+![](assets/gifs/gif-demo.gif)
 
 ## Screenshots
 ![](assets/images/screenshot-1.png)
